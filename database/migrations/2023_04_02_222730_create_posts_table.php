@@ -19,6 +19,7 @@ return new class extends Migration
             $table->longText("description");
             $table->longText("strip_description");
             $table->string("cover_image");
+            $table->timestamps();
         });
     }
 
