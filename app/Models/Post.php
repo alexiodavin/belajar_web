@@ -12,7 +12,8 @@ class Post extends Model
         'title',
         'description',
         'strip_description',
-        'cover_image'
+        'cover_image',
+        'is_featured'
     ];  
     public function coverImageUrl()
     {
@@ -20,6 +21,7 @@ class Post extends Model
         return asset($path.$this->cover_image);
     }
     
+        
     
 
 }

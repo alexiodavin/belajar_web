@@ -45,7 +45,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{ route('artikel') }}" class="nav-link {{ request()->routeIs('artikel') ? 'active' : '' }}">
+            <a href="{{ route('admin.artikel') }}" class="nav-link {{ request()->routeIs('admin.artikel') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 artikel

@@ -92,6 +92,13 @@
                                     </div>
                                     </div>
                                 </div>
+                            </form>
+                            <form action="{{ route('admin.artikel.isfeatured',['id' => $post->id]) }}" method="GET">
+                                @csrf
+                                 <button type="submit" class="btn btn-icon">
+                                    <i class="fa-regular fa-star {{ $post->is_featured==true?'text-warning':'' }}"></i>
+                                </button>
+                            </form>
                         </td>
                         <td>
                             <img src="{{ $post->coverImageUrl()}}" class="d-block mx-auto w-50" alt="Gambar">
@@ -99,8 +106,8 @@
                       </tr>
                       @endforeach
             </table>
-            {{ $posts->links() }}
             </div>
+            {{ $posts->links() }}
         </div>
     </div>
 

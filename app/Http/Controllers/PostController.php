@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    protected $paginationTheme = 'bootstrap';
     /**
      * Display a listing of the resource.
      *
@@ -115,6 +116,21 @@ class PostController extends Controller
         return back();
     }
 
+    public function isFeatured(Request $request)
+    {
+        $post = Post::find($request->id);
+
+        if ($post->is_featured==true) {
+            $post->update([
+                'is_featured'=>false,
+            ]);
+        } else {
+            $post->update([
+                'is_featured'=>true,
+            ]);
+        }
+        return redirect('/artikel')->with('success', 'Data berhasil diubah.');   
+    }
     
 
 } 
