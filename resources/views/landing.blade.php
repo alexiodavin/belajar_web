@@ -81,9 +81,9 @@
                       <a href="#!"><img class="card-img-top" src="{{ $post->coverImageUrl()}}" alt="..." /></a>
                       <div class="card-body">
                           <div class="small text-muted">January 1, 2023</div>
-                          <h2 class="card-title">{{ $post->title  }}</h2>
+                          <h2 class="card-title h4">{{ $post->title  }}</h2>
                           <p class="card-text">{{ Str::limit($post->strip_description, 100, '...') }}</p>
-                          <a class="btn btn-primary" href="{{  url('article/'.$post->id) }}">Read more →</a>
+                          <a class="btn btn-primary" href="{{  url('article/'.$post->slug) }}">Read more →</a>
                       </div>
                       @endforeach
                   </div>
@@ -98,7 +98,7 @@
                                   <div class="small text-muted">January 1, 2023</div>
                                   <h2 class="card-title h4">{{ $post->title  }}</h2>
                                   <p class="card-text">{{ Str::limit($post->strip_description, 100, '...') }}</p>
-                                  <a class="btn btn-primary" href="{{  url('article/'.$post->id) }}">Read more →</a>
+                                  <a class="btn btn-primary" href="{{  url('article/'.$post->slug) }}">Read more →</a>
                               </div>
                           </div>
                   </div>
@@ -139,9 +139,9 @@
                           <div class="row">
                               <div class="col-sm-6">
                                   <ul class="list-unstyled mb-0">
-                                      <li><a href="#!">Web Design</a></li>
+                                      <li><a href="{{ route('list.category',['slug'=>$post->category->slug]) }}">Web Design</a></li>
                                       <li><a href="#!">HTML</a></li>
-                                      <li><a href="#!">Freebies</a></li>
+                                      <li><a href="#!">Otomotif</a></li>
                                   </ul>
                               </div>
                               <div class="col-sm-6">

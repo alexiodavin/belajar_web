@@ -46,6 +46,7 @@
                         <th>No</th>
                         <th>Judul</th>
                         <th>Deskripsi</th>
+                        <th>Kategori</th>
                         <th>Aksi</th>
                         <th>Cover</th>
                       </tr>
@@ -61,6 +62,9 @@
                         <div>
                             {{ Str::limit($post->strip_description, 250, '... Read More') }}
                         </div>
+                        </td>
+                        <td>
+                            <p>{{ $post->category->name }}</p>
                         </td>
                         <td >
                             <a href="{{  url('edit/'.$post->id) }}" value="edit" class="btn btn-icon"><i class="fa-solid fa-pen-to-square" style="color: #009dff;"></i></a>

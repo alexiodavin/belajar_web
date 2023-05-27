@@ -3,6 +3,8 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\CategoryController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -44,5 +46,5 @@ Route::post('artikel/{id}', [PostController::class,'destroy']);
 Route::get('edit/{id}', [PostController::class,'edit']);
 Route::post('edit/{id}', [PostController::class,'update'])->name('put.edit');
 Route::get('/landing', [LandingController::class,'index']);
-Route::get('article/{id}', [ArtikelController::class,'index']);
-Route::get('/articles', [ArticleController::class, 'index']);
+Route::get('article/{slug}', [ArtikelController::class,'index']);
+Route::get('/categories/{slug}', [CategoryController::class,'index'])->name('list.category');

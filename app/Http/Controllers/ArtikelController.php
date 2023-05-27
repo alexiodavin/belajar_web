@@ -10,7 +10,7 @@ class ArtikelController extends Controller
 
 {
     public function index(Request $request) {
-        $post=Post::findOrFail($request->id);
+        $post=Post::where('slug',$request->slug)->first();
         Return view('article', compact('post'));
     }
 

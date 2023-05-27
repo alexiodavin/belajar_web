@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>artikel</title>
+        <title>@yield('page-title')</title>
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -61,126 +61,81 @@
         </div>
         </div>
     </nav>
-<!-- Page content-->
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-8">
-            <!-- Post content-->
-            <article>
-                <!-- Post header-->
-                <header class="mb-4">
-                    <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">{{ $post->title }}</h1>
-                    <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">Posted on January 1, 2023 by Start Bootstrap</div>
-                    <!-- Post categories-->
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ $post->category->name }}</a>
-                </header>
-                <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded w-100" src="{{ $post->coverImageUrl()}}" alt="..."/></figure>
-                <!-- Post content-->
-                <section class="mb-5">
-                    <p class="fs-5 mb-4"> {!! $post->description !!} </p>
-                </section>
-            </article>
-            <!-- Comments section-->
-            <section class="mb-5">
-                <div class="card bg-light">
-                    <div class="card-body">
-                        <!-- Comment form-->
-                        <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                        <!-- Comment with nested comments-->
-                        <div class="d-flex mb-4">
-                            <!-- Parent comment-->
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                <!-- Child comment 1-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                    </div>
-                                </div>
-                                <!-- Child comment 2-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When you put money directly to a problem, it makes a good headline.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single comment-->
-                        <div class="d-flex">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <!-- Side widgets-->
-            <div class="col-lg-4">
+        <!-- Page header with logo and tagline-->
+        <header class="py-5 bg-light border-bottom mb-4">
+          <div class="container">
+              <div class="text-center my-5">
+                  <h1 class="fw-bolder">Welcome to Blog Home!</h1>
+                  <p class="lead mb-0">{{ $post->category->name }}</p>
+              </div>
+          </div>
+      </header>
+      <!-- Page content-->
+      <div class="container">
+          <div class="row">
+              <!-- Blog entries-->
+              <div class="col-lg-8">
+                  <!-- Featured blog post-->
+                  <div class="card mb-4">
+                    @foreach ($posts as $post)
+                      <a href="#!"><img class="card-img-top" src="{{ $post->coverImageUrl()}}" alt="..." /></a>
+                      <div class="card-body">
+                          <div class="small text-muted">January 1, 2023</div>
+                          <h2 class="card-title h4">{{ $post->title  }}</h2>
+                          <p class="card-text">{{ Str::limit($post->strip_description, 100, '...') }}</p>
+                          <a class="btn btn-primary" href="{{  url('article/'.$post->slug) }}">Read more →</a>
+                      </div>
+                      @endforeach
+                  </div>
+
+                  <!-- Pagination-->
+                  {{-- {{ $posts->links() }} --}}
+                 </div>
+              <!-- Side widgets-->
+              <div class="col-lg-4">
                 <div class="row">
-                  <div class="col-md-4">
-                    <img src="https://via.placeholder.com/350x200" class="img-fluid" alt="...">
                   </div>
-                  <div class="col-md-8">
-                    <div class="d-flex w-100 justify-content-between">
-                      <h6 class="mb-1">News 1</h6>
-                          <small>10 mins ago</small>
-                        </div>
-                        <small class="mb-1">Description of the news 1.</small>
-                    </div>
+                  <!-- Search widget-->
+                  <div class="card mb-4">
+                      <div class="card-header">Search</div>
+                      <div class="card-body">
+                          <div class="input-group">
+                              <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                              <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                          </div>
+                      </div>
                   </div>
-<br></br>
-            <!-- Search widget-->
-            <div class="card mb-4">
-                <div class="card-header">Search</div>
-                <div class="card-body">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Categories widget-->
-            <div class="card mb-4">
-                <div class="card-header">Categories</div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#!">Web Design</a></li>
-                                <li><a href="#!">HTML</a></li>
-                                <li><a href="#!">Freebies</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#!">JavaScript</a></li>
-                                <li><a href="#!">CSS</a></li>
-                                <li><a href="#!">Tutorials</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Side widget-->
-            <div class="card mb-4">
-                <div class="card-header">Side Widget</div>
-                <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-            </div>
-        </div>
-    </div>
-</div>
+                  <!-- Categories widget-->
+                  <div class="card mb-4">
+                      <div class="card-header">Categories</div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  <ul class="list-unstyled mb-0">
+                                      <li><a href="">Web Design</a></li>
+                                      <li><a href="#!">HTML</a></li>
+                                      <li><a href="#!">Otomotif</a></li>
+                                  </ul>
+                              </div>
+                              <div class="col-sm-6">
+                                  <ul class="list-unstyled mb-0">
+                                      <li><a href="#!">JavaScript</a></li>
+                                      <li><a href="#!">CSS</a></li>
+                                      <li><a href="#!">Tutorials</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <!-- Side widget-->
+                  <div class="card mb-4">
+                      <div class="card-header">Side Widget</div>
+                      <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
           <!--footer-->
           <footer class="bg-dark text-white">
             <div class="container py-5">

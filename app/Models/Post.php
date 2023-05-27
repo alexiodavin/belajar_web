@@ -10,7 +10,9 @@ class Post extends Model
     use HasFactory;
     protected $fillable = [
         'title',
+        'category_id',
         'description',
+        'slug',
         'strip_description',
         'cover_image',
         'is_featured'
@@ -19,6 +21,10 @@ class Post extends Model
     {
         $path ="cover_image/";
         return asset($path.$this->cover_image);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);    
     }
     
         
